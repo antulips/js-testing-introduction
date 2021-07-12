@@ -39,6 +39,14 @@ describe('Pruebas de validación', () => {
         const text = validateInput('');
         expect(text).toBeFalsy;
     });
+    test('Salida con un espacio', () => {
+        const text = validateInput(' ');
+        expect(text).toBeFalsy;
+    });
+    test('Salida con un texto NaN', () => {
+        const text = validateInput('4ea56');
+        expect(text).toBeFalsy;
+    });
     test('Salida con datos válidos', () => {
         const text2 = validateInput('Lucas', 25)
         expect(text2).toBeTruthy;

@@ -28,23 +28,28 @@ describe('Pruebas de creación de elementos', () => {
         const element = '<li class="user-item">Daniel (30 years old)</li>';
         expect(newElement.textContent).toMatch('Daniel (30 years old)');
     });
+    test('Salida con HTML', () => {
+        const newElement = createElement('li','Daniel (30 years old)','user-item');
+        const element = '<li class="user-item">Daniel (30 years old)</li>';
+        expect.objectContaining(`${newElement}`);
+    });
 });
 
 describe('Pruebas de validación', () => {
     test('Salida con datos numéricos', () => {
-        const text = validateInput(4);
+        const text = validateInput('4', 4);
         expect(text).toBeFalsy;
     });
     test('Salida con datos vacíos', () => {
-        const text = validateInput('');
+        const text = validateInput();
         expect(text).toBeFalsy;
     });
-    test('Salida con un espacio', () => {
-        const text = validateInput(' ');
+    test('Salida con espacios', () => {
+        const text = validateInput(' ', ' ');
         expect(text).toBeFalsy;
     });
     test('Salida con un texto NaN', () => {
-        const text = validateInput('4ea56');
+        const text = validateInput('4ea56 ', '4t');
         expect(text).toBeFalsy;
     });
     test('Salida con datos válidos', () => {

@@ -1,13 +1,16 @@
-const { generateText } = require('../util');
+const { generateText, validateInput, createElement } = require('../util');
+const fs = require("fs");
+document.body.innerHTML = fs.readFileSync("./index.html");
 
 describe('Pruebas de salida de datos', () => {
-    test('Salida de Nombre y edad', () => {
+    test('Salida con datos', () => {
         const text = generateText('Daniel', 30);
         expect(text).toBe('Daniel (30 years old)');
 
         const text2 = generateText('Lucas', 25)
         expect(text2).toBe('Lucas (25 years old)');
     });
+    
     it('Salida con datos vacíos', () => {
         const text = generateText('', null);
         expect(text).toBe(' (null years old)');
@@ -18,3 +21,25 @@ describe('Pruebas de salida de datos', () => {
         expect(text).toBe('undefined (undefined years old)');
     });
 });
+
+describe('Pruebas de creación de elementos', () => {
+    test('Salida con datos', () => {
+        const newElement = createElement('li','Daniel (30 years old)','user-item');
+        expect(newElement).toBe('<li class="user-item">Daniel (30 years old)</li>')
+    });
+});
+
+describe('Pruebas de validación', () => {
+    test('Salida con datos numéricos', () => {
+        const text = generateText(4);
+        expect(text).toBeFalsy;
+    });
+    test('Salida con datos vacíos', () => {
+        const text = generateText('');
+        expect(text).toBeFalsy;
+    });
+    test('Salida con datos válidos', () => {
+        const text2 = generateText('Lucas', 25)
+        expect(text2).toBe('Lucas (25 years old)');
+    });
+})

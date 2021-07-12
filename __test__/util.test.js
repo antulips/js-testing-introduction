@@ -25,21 +25,22 @@ describe('Pruebas de salida de datos', () => {
 describe('Pruebas de creación de elementos', () => {
     test('Salida con datos', () => {
         const newElement = createElement('li','Daniel (30 years old)','user-item');
-        expect(newElement).toBe('<li class="user-item">Daniel (30 years old)</li>')
+        const element = '<li class="user-item">Daniel (30 years old)</li>';
+        expect(newElement.textContent).toMatch('Daniel (30 years old)');
     });
 });
 
 describe('Pruebas de validación', () => {
     test('Salida con datos numéricos', () => {
-        const text = generateText(4);
+        const text = validateInput(4);
         expect(text).toBeFalsy;
     });
     test('Salida con datos vacíos', () => {
-        const text = generateText('');
+        const text = validateInput('');
         expect(text).toBeFalsy;
     });
     test('Salida con datos válidos', () => {
-        const text2 = generateText('Lucas', 25)
-        expect(text2).toBe('Lucas (25 years old)');
+        const text2 = validateInput('Lucas', 25)
+        expect(text2).toBeTruthy;
     });
 })
